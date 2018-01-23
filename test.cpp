@@ -101,13 +101,45 @@ void testarUnitario() {
     modelo1.executar(1);
     assert(fluxo1.getOrigem()->getValor() == 0);
     assert(fluxo1.getDestino()->getValor() == 110);
-
     cout << "TESTES UNITARIOS COMPLETADOS" << endl;
+
+}
+
+int testarFuncional(){
+    class Exponencial : public Fluxo{
+    public:
+        double executa(){
+           return this->getOrigem()->getValor() * 1.01;
+        }
+    };
+
+    class Logaritimo : public Fluxo{
+    public:
+        double executa(){
+            return this->getOrigem()->getValor() * 0.95;
+        }
+    };
+    Fluxo *fluxo1 = new Exponencial();
+    Fluxo *fluxo2 = new Logaritimo();
+    Modelo *modeloTeste1 = new Modelo();
+    Sistema *sistemaTeste1 = new Sistema("SistemaTeste1",100);
+    Sistema *sistemaTeste2 = new Sistema("SistemaTeste2",10);
+    fluxo1->setOrigem(sistemaTeste1);
+    fluxo1->setDestino(sistemaTeste2);
+    fluxo2->setOrigem(sistemaTeste2);
+    fluxo2->setDestino(sistemaTeste1);
+    modeloTeste1->adicionar(fluxo1);
+    modeloTeste1->adicionar(fluxo2);
+    modeloTeste1->executar(2);
+    assert(sistemaTeste2->getValor() - 16.66 <= 0.0001);
+    cout << "TESTE FUNCIONAL COMPLETO" << endl;
+    return 0;
 
 }
 
 int main() {
     testarUnitario();
+    testarFuncional();
     return 0;
 }
 
