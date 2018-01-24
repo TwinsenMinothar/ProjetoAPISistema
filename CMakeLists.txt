@@ -3,4 +3,4 @@ project(ProjetoAPISistema)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(ProjetoAPISistema Fluxo.cpp Fluxo.h Sistema.cpp Sistema.h Modelo.cpp Modelo.h test.cpp)
+add_executable(ProjetoAPISistema Fluxo.h Sistema.h Modelo.h test.cpp FluxoImp.cpp FluxoImp.h SistemaImp.cpp SistemaImp.h ModeloImp.cpp ModeloImp.h)

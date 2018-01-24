@@ -11,39 +11,29 @@ using std::string;
 
 class Sistema {
 
-private:
-    string nome;
-    double valor;
 public:
-    Sistema();
 
-    Sistema(string, double);
+    virtual Sistema &operator=(const Sistema &sistema)=0;
 
-    Sistema(Sistema &sistema);
+    virtual bool operator==(const Sistema &rhs) const =0;
 
-    virtual ~Sistema();
+    virtual bool operator!=(const Sistema &rhs) const =0;
 
-    Sistema &operator=(const Sistema &sistema);
+    virtual const string &getNome() const =0;
 
-    bool operator==(const Sistema &rhs) const;
+    virtual void setNome(const string &nome)=0;
 
-    bool operator!=(const Sistema &rhs) const;
+    virtual double getValor() const =0;
 
-    const string &getNome() const;
+    virtual void setValor(double valor)=0;
 
-    void setNome(const string &nome);
+    virtual bool operator>(const Sistema &rhs) const =0;
 
-    double getValor() const;
+    virtual bool operator<=(const Sistema &rhs) const =0;
 
-    void setValor(double valor);
+    virtual bool operator>=(const Sistema &rhs) const =0;
 
-    bool operator>(const Sistema &rhs) const;
-
-    bool operator<=(const Sistema &rhs) const;
-
-    bool operator>=(const Sistema &rhs) const;
-
-    bool operator<(const Sistema &rhs) const;
+    virtual bool operator<(const Sistema &rhs) const =0;
 };
 
 

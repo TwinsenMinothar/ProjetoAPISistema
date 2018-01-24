@@ -8,36 +8,27 @@
 #include "Sistema.h"
 
 class Fluxo {
-private:
-    string nome;
-    Sistema *origem;
-    Sistema *destino;
 public:
-    Fluxo();
 
-    Fluxo(string, Sistema *, Sistema *);
-
-    Fluxo &operator=(const Fluxo &);
-
-    virtual ~Fluxo();
+    virtual Fluxo &operator=(const Fluxo &)=0;
 
     virtual double executa()=0;
 
-    const string &getNome() const;
+    virtual const string &getNome() const =0;
 
-    Sistema *getOrigem() const;
+    virtual Sistema *getOrigem() const =0;
 
-    Sistema *getDestino() const;
+    virtual Sistema *getDestino() const =0;
 
-    void setNome(const string &nome);
+    virtual void setNome(const string &nome)=0;
 
-    void setOrigem(Sistema *origem);
+    virtual void setOrigem(Sistema *origem)=0;
 
-    void setDestino(Sistema *destino);
+    virtual void setDestino(Sistema *destino)=0;
 
-    bool operator==(const Fluxo &rhs) const;
+    virtual bool operator==(const Fluxo &rhs) const =0;
 
-    bool operator!=(const Fluxo &rhs) const;
+    virtual bool operator!=(const Fluxo &rhs) const =0;
 
 };
 

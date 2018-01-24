@@ -11,48 +11,39 @@
 using std::vector;
 
 class Modelo {
-private:
-    string nome;
-    vector<Fluxo *> fluxos;
-    vector<Sistema *> sistemas;
 public:
-    Modelo();
 
-    Modelo(string, vector<Fluxo *>, vector<Sistema *>);
+    virtual const string &getNome() const =0;
 
-    virtual ~Modelo();
+    virtual void setNome(const string &nome)=0;
 
-    const string &getNome() const;
+    virtual const vector<Fluxo *> &getFluxos() const =0;
 
-    void setNome(const string &nome);
+    virtual void setFluxos(const vector<Fluxo *> &fluxos)=0;
 
-    const vector<Fluxo *> &getFluxos() const;
+    virtual const vector<Sistema *> &getSistemas() const =0;
 
-    void setFluxos(const vector<Fluxo *> &fluxos);
+    virtual void setSistemas(const vector<Sistema *> &sistemas)=0;
 
-    const vector<Sistema *> &getSistemas() const;
+    virtual bool operator==(const Modelo &rhs) const =0;
 
-    void setSistemas(const vector<Sistema *> &sistemas);
+    virtual bool operator!=(const Modelo &rhs) const =0;
 
-    bool operator==(const Modelo &rhs) const;
+    virtual Modelo &operator=(const Modelo &)=0;
 
-    bool operator!=(const Modelo &rhs) const;
+    virtual bool adicionar(Fluxo *fluxo)=0;
 
-    Modelo &operator=(const Modelo &);
+    virtual bool adicionar(Sistema *sistema)=0;
 
-    bool adicionar(Fluxo *fluxo);
+    virtual bool remover(Fluxo *fluxo)=0;
 
-    bool adicionar(Sistema *sistema);
+    virtual bool remover(Sistema *sistema)=0;
 
-    bool remover(Fluxo *fluxo);
+    virtual Fluxo *getFluxo(string)=0;
 
-    bool remover(Sistema *sistema);
+    virtual Sistema *getSistema(string)=0;
 
-    Fluxo* getFluxo(string);
-
-    Sistema* getSistema(string);
-
-    bool executar(int);
+    virtual bool executar(int)=0;
 };
 
 
