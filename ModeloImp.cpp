@@ -14,8 +14,21 @@ ModeloImp::ModeloImp(string nome, vector<Fluxo *> fluxos, vector<Sistema *> sist
     this->sistemas = sistemas;
 }
 
-ModeloImp::~ModeloImp() {
+ModeloImp::ModeloImp(const Modelo &modelo) {
+    this->nome = modelo.getNome();
+    this->fluxos = modelo.getFluxos();
+    this->sistemas = modelo.getSistemas();
+}
 
+ModeloImp::~ModeloImp() {
+    for (unsigned int j = 0; j < this->fluxos.size(); j++){
+        delete ((Fluxo*) fluxos[j]);
+    }
+    fluxos.clear();
+    for (unsigned int j = 0; j < this->sistemas.size(); j++){
+        delete ((Sistema*) sistemas[j]);
+    }
+    sistemas.clear();
 }
 
 const string &ModeloImp::getNome() const {
@@ -122,3 +135,28 @@ bool ModeloImp::executar(int tempo) {
     }
     return true;
 }
+
+Sistema* ModeloImp::criarSistema(string nome, double valor){
+    Sistema *sis = new SistemaImp(nome, valor);
+    this->adicionar(sis);
+    return sis;
+}
+
+Modelo* ModeloImp::criarModelo(){
+    Modelo *m = new ModeloImp();
+    return m;
+}
+
+Modelo* ModeloImp::criarModelo(Modelo& modelo){
+    Modelo *m = new ModeloImp(modelo);
+    return m;
+}
+
+Modelo* Modelo::criarModelo(){
+    return ModeloImp::criarModelo();
+}
+
+Modelo* Modelo::criarModelo(Modelo &modelo){
+    return ModeloImp::criarModelo(modelo);
+}
+

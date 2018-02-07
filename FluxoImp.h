@@ -7,6 +7,7 @@
 
 
 #include "Fluxo.h"
+#include "SistemaImp.h"
 
 class FluxoImp : public Fluxo {
 protected:

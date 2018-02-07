@@ -5,13 +5,25 @@
 #ifndef PROJETOAPISISTEMA_MODELO_H
 #define PROJETOAPISISTEMA_MODELO_H
 
-#include "Fluxo.h"
+#include "FluxoImp.h"
 #include <vector>
 
 using std::vector;
 
 class Modelo {
 public:
+
+    template<typename FluxoT>
+    Fluxo* criarFluxo(string nome, Sistema* origem, Sistema* destino){
+        Fluxo *fluxo = new FluxoT;
+        fluxo->setNome(nome);
+        fluxo->setOrigem(origem);
+        fluxo->setDestino(destino);
+        this->adicionar(fluxo);
+        return fluxo;
+    }
+
+    virtual Sistema* criarSistema(string, double)=0;
 
     virtual const string &getNome() const =0;
 
@@ -44,6 +56,10 @@ public:
     virtual Sistema *getSistema(string)=0;
 
     virtual bool executar(int)=0;
+
+    static Modelo *criarModelo();
+
+    static Modelo *criarModelo(Modelo &md);
 };
 
 

@@ -5,7 +5,7 @@
 #ifndef PROJETOAPISISTEMA_FLUXO_H
 #define PROJETOAPISISTEMA_FLUXO_H
 
-#include "Sistema.h"
+#include "SistemaImp.h"
 
 class Fluxo {
 public:

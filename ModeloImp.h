@@ -5,9 +5,9 @@
 #ifndef PROJETOAPISISTEMA_MODELOIMP_H
 #define PROJETOAPISISTEMA_MODELOIMP_H
 
-#include "Fluxo.h"
 #include "Modelo.h"
 #include <vector>
+
 using std::vector;
 
 class ModeloImp : public Modelo {
@@ -20,6 +20,8 @@ public:
     ModeloImp();
 
     ModeloImp(string string1, vector<Fluxo *> vector1, vector<Sistema *> vector2);
+
+    ModeloImp(const Modelo &modelo);
 
     virtual ~ModeloImp();
 
@@ -54,6 +56,12 @@ public:
     Sistema *getSistema(string string1) override;
 
     bool executar(int i) override;
+
+    Sistema *criarSistema(string, double);
+
+    static Modelo *criarModelo();
+
+    static Modelo *criarModelo(Modelo &md);
 };
 
 

@@ -6,9 +6,6 @@
 #include <cassert>
 #include <cmath>
 #include "Modelo.h"
-#include "ModeloImp.h"
-#include "SistemaImp.h"
-#include "FluxoImp.h"
 
 using namespace std;
 
@@ -20,7 +17,6 @@ void testarUnitario() {
             return 10;
         }
     };
-
     //Sistema
     Sistema *sistema1 = new SistemaImp();
     //Construtor Padrao
@@ -65,7 +61,7 @@ void testarUnitario() {
     assert(*fluxo1 == *fluxo2);
 
     //Modelo
-    Modelo *modelo1 = new ModeloImp();
+    Modelo *modelo1 = Modelo::criarModelo();
     //Construtor Padrao
     assert(modelo1->getNome() == "");
     //Set Get
@@ -92,7 +88,7 @@ void testarUnitario() {
     modelo1->remover(s2);
     assert(modelo1->getSistema("SistemaTeste1") == nullptr);
     //Operadores
-    Modelo *modelo2 = new ModeloImp();
+    Modelo *modelo2 = Modelo::criarModelo();
     assert(modelo1 != modelo2);
     modelo1 = modelo2;
     assert(modelo1 == modelo2);
@@ -126,7 +122,7 @@ int testarFuncional() {
     };
     Fluxo *fluxo1 = new Exponencial();
     Fluxo *fluxo2 = new Logaritimo();
-    Modelo *modeloTeste1 = new ModeloImp();
+    Modelo *modeloTeste1 = Modelo::criarModelo();
     Sistema *sistemaTeste1 = new SistemaImp("SistemaTeste1", 100);
     Sistema *sistemaTeste2 = new SistemaImp("SistemaTeste2", 10);
     fluxo1->setOrigem(sistemaTeste1);
@@ -137,6 +133,20 @@ int testarFuncional() {
     modeloTeste1->adicionar(fluxo2);
     modeloTeste1->executar(2);
     assert(sistemaTeste2->getValor() - 16.66 <= 0.0001);
+
+    Modelo *modeloTeste2 = Modelo::criarModelo();
+    modeloTeste2->setNome("ModeloTeste2");
+    modeloTeste2->criarSistema("Sistema1",5);
+    modeloTeste2->criarSistema("Sistema2",4);
+    modeloTeste2->criarSistema("Sistema2",9);
+    modeloTeste2->criarFluxo<Exponencial>("Fluxo1",modeloTeste2->getSistema("Sistema1"),modeloTeste2->getSistema("Sistema2"));
+    modeloTeste2->criarFluxo<Exponencial>("Fluxo1",modeloTeste2->getSistema("Sistema2"),modeloTeste2->getSistema("Sistema3"));
+    modeloTeste2->criarFluxo<Exponencial>("Fluxo1",modeloTeste2->getSistema("Sistema3"),modeloTeste2->getSistema("Sistema1"));
+    modeloTeste2->executar(31);
+    cout << modeloTeste2->getSistema("Sistema1")->getValor();
+    cout << modeloTeste2->getSistema("Sistema2")->getValor();
+    cout << modeloTeste2->getSistema("Sistema3")->getValor();
+
     cout << "TESTE FUNCIONAL COMPLETO" << endl;
     return 0;
 
