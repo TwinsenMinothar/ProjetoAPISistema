@@ -7,7 +7,7 @@
 #include "Sistema.h"
 
 class SistemaImp : public Sistema {
-private:
+protected:
     string nome;
     double valor;
 public:

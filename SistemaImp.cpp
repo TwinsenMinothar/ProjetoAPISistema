@@ -2,6 +2,7 @@
 // Created by camil on 23/01/2018.
 //
 
+#include <iostream>
 #include "SistemaImp.h"
 
 SistemaImp::SistemaImp() : Sistema() {

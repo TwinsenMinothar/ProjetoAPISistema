@@ -9,7 +9,7 @@
 #include "Fluxo.h"
 
 class FluxoImp : public Fluxo {
-private:
+protected:
     string nome;
     Sistema *origem;
     Sistema *destino;

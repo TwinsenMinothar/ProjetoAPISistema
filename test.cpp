@@ -39,11 +39,11 @@ void testarUnitario() {
     Sistema *sistema3 = new SistemaImp();
     assert(*sistema1 != *sistema2);
     sistema2 = sistema1;
-    assert(sistema1 == sistema2);
+    assert(*sistema1 == *sistema2);
     sistema1->setValor(100);
     sistema3->setValor(80);
-    assert(sistema1 > sistema3);
-    assert(sistema3 < sistema1);
+    assert(*sistema1 > *sistema3);
+    assert(*sistema3 < *sistema1);
 
     //Fluxo
     FluxoTeste *fluxo1 = new FluxoTeste();
@@ -60,9 +60,9 @@ void testarUnitario() {
     assert(fluxo1->getDestino() == sistema2);
     //Operadores
     FluxoTeste *fluxo2 = new FluxoTeste();
-    assert(fluxo1 != fluxo2);
+    assert(*fluxo1 != *fluxo2);
     fluxo2 = fluxo1;
-    assert(fluxo1 == fluxo2);
+    assert(*fluxo1 == *fluxo2);
 
     //Modelo
     Modelo *modelo1 = new ModeloImp();
@@ -99,9 +99,9 @@ void testarUnitario() {
 
     //Executar
     sistema1->setValor(10);
-    sistema2->setValor(100);
+    sistema3->setValor(100);
     fluxo1->setOrigem(sistema1);
-    fluxo1->setDestino(sistema2);
+    fluxo1->setDestino(sistema3);
     modelo1->adicionar(fluxo1);
     modelo1->executar(1);
     assert(fluxo1->getOrigem()->getValor() == 0);

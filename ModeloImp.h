@@ -11,7 +11,7 @@
 using std::vector;
 
 class ModeloImp : public Modelo {
-private:
+protected:
     string nome;
     vector<Fluxo *> fluxos;
     vector<Sistema *> sistemas;
